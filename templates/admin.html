@@ -1,0 +1,226 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - AI Resume Analyzer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      border-radius: 0;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .table th, .table td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+    <a class="navbar-brand fw-bold" href="#">AI Resume Analyzer</a>
+    <div class="ms-auto">
+      <a href="login.html" class="btn btn-light btn-sm">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <h3 class="text-center mb-4">Admin Dashboard</h3>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card p-4 mb-4">
+          <h5 class="fw-bold mb-3">Upload Job Description</h5>
+          <form>
+            <div class="mb-3">
+              <input type="file" class="form-control" accept=".pdf,.doc,.docx,.txt" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Upload & Analyze</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card p-4">
+          <h5 class="fw-bold mb-3">Candidate Resumes</h5>
+          <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+              <tr>
+                <th>Candidate Name</th>
+                <th>Email</th>
+                <th>Match Score</th>
+                <th>Skills Gap</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>85%</td>
+                <td>Python, SQL</td>
+                <td><button class="btn btn-sm btn-primary">View Resume</button></td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>72%</td>
+                <td>Machine Learning</td>
+                <td><button class="btn btn-sm btn-primary">View Resume</button></td>
+              </tr>
+              <tr>
+                <td>David Wilson</td>
+                <td>david@example.com</td>
+                <td>90%</td>
+                <td>None</td>
+                <td><button class="btn btn-sm btn-primary">View Resume</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - AI Resume Analyzer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .result-box {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #ffffff;
+      min-height: 50px;
+      max-height: 100px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+    <a class="navbar-brand fw-bold" href="#">AI Resume Analyzer</a>
+    <div class="ms-auto">
+      <a href="{{ url_for('logout') }}" class="btn btn-light btn-sm">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container py-5">
+    <h3 class="text-center mb-4">Admin Dashboard</h3>
+
+    <!-- Job Description Upload -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h5 class="fw-bold mb-3">Upload Job Description</h5>
+          <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_job') }}">
+            <div class="mb-3">
+              <input type="file" class="form-control" name="job_file" accept=".pdf,.doc,.docx,.txt" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Upload & Analyze</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Candidate Resumes Table -->
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card p-4">
+          <h5 class="fw-bold mb-3">Candidate Resumes</h5>
+          <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+              <tr>
+                <th>Candidate Name</th>
+                <th>Email</th>
+                <th>Resume File</th>
+                <th>Analysis Result</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if resumes %}
+                {% for resume in resumes %}
+                  <tr>
+                    <td>{{ resume.user.name }}</td>
+                    <td>{{ resume.user.email }}</td>
+                    <td>{{ resume.file_name }}</td>
+                    <td>
+                      {% if resume.parsed_text %}
+                        <div class="result-box">{{ resume.parsed_text[:100] }}...</div>
+                      {% else %}
+                        <div class="result-box text-muted">Pending Analysis</div>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="{{ url_for('view_resume', resume_id=resume.id) }}" class="btn btn-sm btn-primary">View</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="5" class="text-center text-muted">No resumes uploaded yet.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
